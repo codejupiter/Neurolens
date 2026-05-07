@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroZen — Study with Clarity</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">NeuroZen</span>
+    </div>
+    <nav class="nav-pills">
+      <button class="pill active" data-mode="explore">Explore</button>
+      <button class="pill" data-mode="quiz">Quiz</button>
+      <button class="pill" data-mode="concepts">Concepts</button>
+    </nav>
+    <div class="session-info">
+      <span class="session-label">Session calm</span>
+      <span class="session-dot"></span>
+    </div>
+  </header>
+
+  <!-- ── Main Layout ─────────────────────────────────── -->
+  <main class="layout">
+
+    <!-- Left: topic navigator -->
+    <aside class="panel panel-left">
+      <h2 class="panel-title">Topics</h2>
+      <ul class="topic-list">
+        <li class="topic-item active">Action Potential</li>
+        <li class="topic-item">Synapse &amp; Neurotransmission</li>
+        <li class="topic-item">Blood–Brain Barrier</li>
+        <li class="topic-item">Limbic System</li>
+        <li class="topic-item">Cranial Nerves</li>
+        <li class="topic-item">Cortical Lobes</li>
+      </ul>
+
+      <!-- Anatomy legend -->
+      <div class="legend">
+        <h3 class="legend-title">Anatomy key</h3>
+        <div class="legend-item"><span class="leg-dot" style="background:#7eb8ff"></span> Soma</div>
+        <div class="legend-item"><span class="leg-dot" style="background:#56cfb2"></span> Dendrites</div>
+        <div class="legend-item"><span class="leg-dot" style="background:#ddeeff"></span> Myelin sheath</div>
+        <div class="legend-item"><span class="leg-dot" style="background:#5e9bfc"></span> Axon / Nodes of Ranvier</div>
+        <div class="legend-item"><span class="leg-dot" style="background:#f47067"></span> Axon terminals</div>
+      </div>
+
+      <div class="progress-wrap">
+        <span class="progress-label">Today's progress</span>
+        <div class="progress-track">
+          <div class="progress-bar" style="width:35%"></div>
+        </div>
+        <span class="progress-pct">35%</span>
+      </div>
+    </aside>
+
+    <!-- Centre: 3D viewer -->
+    <section class="viewer-wrap">
+      <canvas id="three-canvas"></canvas>
+      <div class="viewer-overlay">
+        <p class="viewer-hint">Drag to rotate &nbsp;·&nbsp; Scroll to zoom</p>
+      </div>
+      <div class="pulse-ring"></div>
+    </section>
+
+    <!-- Right: info + AP graph + quiz -->
+    <aside class="panel panel-right">
+      <h2 class="panel-title">Action Potential</h2>
+      <p class="panel-body">
+        An <em>action potential</em> is a self-propagating electrical
+        depolarisation that travels along the axon via <em>saltatory
+        conduction</em> — jumping between <em>nodes of Ranvier</em> for
+        fast, energy-efficient signalling.
+      </p>
+
+      <div class="key-values">
+        <div class="kv"><span class="kv-label">Resting V<sub>m</sub></span><span class="kv-val">−70 mV</span></div>
+        <div class="kv"><span class="kv-label">Threshold</span><span class="kv-val">−55 mV</span></div>
+        <div class="kv"><span class="kv-label">Peak</span><span class="kv-val">+40 mV</span></div>
+        <div class="kv"><span class="kv-label">Hyperpolar.</span><span class="kv-val">−80 mV</span></div>
+      </div>
+
+      <!-- AP graph + fire button -->
+      <div class="ap-graph-wrap">
+        <div class="ap-graph-header">
+          <span class="ap-graph-label">Membrane voltage trace</span>
+          <button class="micro-btn" id="fire-ap-btn">▶ Fire AP</button>
+        </div>
+        <div class="ap-canvas-box">
+          <canvas id="ap-graph"></canvas>
+        </div>
+        <p class="ap-caption">
+          Click <strong>Fire AP</strong> to animate a real action potential.
+          Watch the 3D model and trace simultaneously.
+        </p>
+      </div>
+
+      <!-- Voice quiz -->
+      <button class="cta-btn" id="speak-btn">
+        <span class="btn-icon">🎙</span> Ask me a question
+      </button>
+      <div class="quiz-box hidden" id="quiz-box">
+        <p class="quiz-q" id="quiz-question"></p>
+        <p class="quiz-hint">Answer aloud or interact with the model.</p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ── Status bar ──────────────────────────────────── -->
+  <footer class="status-bar">
+    <span id="status-msg">Ready — NeuroZen loaded. Select a topic or fire an action potential.</span>
+    <span class="fps-counter" id="fps">-- fps</span>
+  </footer>
+
+  <script type="module" src="renderer.js"></script>
+</body>
+</html>
